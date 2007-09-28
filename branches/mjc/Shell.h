@@ -35,8 +35,6 @@ extern "C"
 #include <readline/readline.h>
 }
 
-#include <CoreFoundation/CoreFoundation.h>
-
 #include "MobileDevice.h"
 #include "NormalInterface.h"
 #include "RecoveryInterface.h"
@@ -85,7 +83,7 @@ extern "C"
 #define	SHELL_RESTORE	1
 #define SHELL_RECOVERY	2
 
-#define MAX_ARGUMENTS	5
+#define MAX_ARGUMENTS	10
 
 // userspace function exit values
 #define SHELL_CONTINUE	-1	// continue reading from interactive shell

@@ -11,6 +11,8 @@ bool run = true;
 #include <windows.h>
 #endif
 
+#undef HAVE_READLINE_COMPLETION
+
 CFStringRef cli_afc_name;
 
 COMMAND normal_shell[] = 
@@ -53,6 +55,7 @@ COMMAND restore_shell[] =
 	{ "help",		sh_help, 	        ">> help <command> - Display help information on <command>.  No args lists commands." },
 	{ "exit",		restore_exit,         	">> exit - Disconnect and wait for device normal reconnect." },
 	{ "run",		sh_run,			">> run <path> - runs a script at <path>."},
+	{ "queryType",	restore_querytype, ">> queryType" },
 	{ (char *)NULL, (shell_funct *)NULL, (char *)NULL }
 };
 
@@ -357,18 +360,21 @@ int main(int argc, char **argv)
 		D("Set default afc name.");
 	}
 	
-	ifNotQuiet cout << 'moo';
 #ifdef HAVE_READLINE_COMPLETION
  	ifNotQuiet cout << " with tab completion."<< endl;
 #else
 	ifNotQuiet cout << endl;
 #endif
 	
-	ifNotQuiet cout << ">> By The iPhoneDev Team: " << 'also moo!' << endl;
+	ifNotQuiet cout << ">> By The iPhoneDev Team." << endl;
 	D("debug mode on.");
 	
 	//Call to SERIOUS_HACKERY
-	ifVerbose cout << "initPrivateFunctions: "; initPrivateFunctions(); ifVerbose cout << endl;
+	ifVerbose cout << "initPrivateFunctions: "; 
+	if(initPrivateFunctions() == EXIT_FAILURE) {
+		cerr << "unable to initialize the private functions" << endl;
+		return EXIT_FAILURE;
+	}
 	//End SERIOUS_HACKERY
 	
 	if( (cli_flags & OPT_RECOVERY) )

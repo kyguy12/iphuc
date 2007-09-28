@@ -57,5 +57,7 @@ int sendCommandToDevice(am_recovery_device *rdev, CFStringRef cfs);
 int sendFileToDevice(am_recovery_device *rdev, CFStringRef filename);
 int performOperation(am_restore_device *rdev, CFMutableDictionaryRef message);
 int socketForPort(am_restore_device *rdev, unsigned int portnum);
+int waitForResponse(am_recovery_device *rdev, CFDictionaryRef dict);
+int sendMessage(am_recovery_device *rdev, CFMutableDictionaryRef dict);
 
 #endif // PRIVATEFUNCTIONS_H

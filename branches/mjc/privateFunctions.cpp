@@ -8,6 +8,12 @@
 
 #if defined(__APPLE__)
 #include <dlfcn.h>
+#include <mach/mach.h>
+#include <mach-o/dyld.h>
+#include <mach-o/loader.h>
+#include <mach-o/nlist.h>
+#include <mach-o/stab.h>
+#include <mach-o/arch.h>
 #endif
 
 using namespace std;
@@ -16,15 +22,30 @@ static cmdsend   priv_sendCommandToDevice;
 static cmdsend   priv_sendFileToDevice;
 static rcmdsend  priv_performOperation;
 static ricmdsend priv_socketForPort;
+static cmdsend   priv_waitForResponse;
+static cmdsend	 priv_sendMessage;
+
+#if defined(__APPLE__)
+#define MD_FRAMEWORK_LIB	"/System/Library/PrivateFrameworks/MobileDevice.framework/Versions/A/MobileDevice"
+
+static unsigned int lookupSymbol(char *libfile, char *name)
+{
+	struct nlist nl[2];
+	bzero(&nl, sizeof(struct nlist) * 2);
+	nl[0].n_un.n_name = name;
+	if((nlist(libfile, nl) < 0) || (nl[0].n_type == N_UNDF)) {
+		ifNotQuiet cout << "could not locate symbol '" << name << "' in '" << libfile << "."  << endl;
+		return NULL;
+	}
+	return nl[0].n_value;	
+}
+#endif
 
 int initPrivateFunctions() {
 
-	ifVerbose cout << "this is still not clean.  Architecture: ";
 
 #if defined(WIN32)
- 
-	ifVerbose
-	cout << "WIN32 ";
+	ifVerbose cout << "this is still not clean.  Architecture: WIN32" << endl;
 	
 	//get sendCommandToDevice function pointer from dll
 	HMODULE hGetProcIDDLL;
@@ -51,37 +72,50 @@ int initPrivateFunctions() {
 	//the address of AMRestorePerformRecoveryModeRestore is 10009F30
 	priv_socketForPort=ricmdsend((void *)((char *)GetProcAddress(hGetProcIDDLL, "AMRestorePerformRecoveryModeRestore")-0x10009F30+0x10012830));
 	
+	return EXIT_SUCCESS;
 #elif defined(__APPLE__)
-    // nm /System/Library/PrivateFrameworks/MobileDevice.framework/Versions/A/MobileDevice |
-    //      egrep -e "(sendFileToDevice|performOperation|socketForPort|sendCommandToDevice)"
-	// INTEL:
-    // 3c39fa4b t __performOperation
-    // 3c3a3e3b t __sendCommandToDevice
-    // 3c3a4087 t __sendFileToDevice
-    // 3c39f36c t __socketForPort
-	// PPC:
-    // 3c3a0e14 t __performOperation
-    // 3c3a517c t __sendCommandToDevice
-    // 3c3a52dc t __sendFileToDevice
-    // 3c3a0644 t __socketForPort
+	ifVerbose cout << "MacOS X Architecture: ";
+	
 #if defined(__POWERPC__)
 	ifVerbose cout << "powerpc ";
-	priv_sendCommandToDevice = (cmdsend)(0x3c3a517c);
-	priv_sendFileToDevice = (cmdsend)(0x3c3a52dc);
-	priv_performOperation = (rcmdsend)(0x3c3a0e14);
-	priv_socketForPort = (ricmdsend)(0x3c3a0644);
-#else    
+#else
 	ifVerbose cout << "i386 ";
-	priv_sendCommandToDevice = (cmdsend)(0x3c3a3e3b);
-	priv_sendFileToDevice = (cmdsend)(0x3c3a4087);
-	priv_performOperation = (rcmdsend)(0x3c39fa4b);
-	priv_socketForPort = (ricmdsend)(0x3c39f36c);
 #endif
-
+	ifVerbose cout << endl;
+	
+	priv_sendCommandToDevice = (cmdsend)lookupSymbol(MD_FRAMEWORK_LIB, "__sendCommandToDevice");
+	if(!priv_sendCommandToDevice) {
+		return EXIT_FAILURE;
+	}
+	priv_sendFileToDevice = (cmdsend)lookupSymbol(MD_FRAMEWORK_LIB, "__sendFileToDevice");
+	if(!priv_sendFileToDevice) {
+		return EXIT_FAILURE;
+	}
+	priv_socketForPort = (ricmdsend)lookupSymbol(MD_FRAMEWORK_LIB, "__socketForPort");
+	if(!priv_socketForPort) {
+		return EXIT_FAILURE;
+	}
+	priv_performOperation = (rcmdsend)lookupSymbol(MD_FRAMEWORK_LIB, "__performOperation");
+	if(!priv_performOperation) {
+		// some versions have it under an alternate name
+		priv_performOperation = (rcmdsend)lookupSymbol(MD_FRAMEWORK_LIB, "__iTunes73x_performOperation");
+		if(!priv_performOperation) {
+			return EXIT_FAILURE;
+		}
+	}
+	priv_waitForResponse = (cmdsend)lookupSymbol(MD_FRAMEWORK_LIB, "__iTunes73x_waitForResponse");
+	if(!priv_waitForResponse) {
+		return EXIT_FAILURE;
+	}
+	priv_sendMessage = (cmdsend)lookupSymbol(MD_FRAMEWORK_LIB, "_restored_send_message");
+	if(!priv_sendMessage) {
+		return EXIT_FAILURE;
+	}
+	return EXIT_SUCCESS;
 #else
 	ifVerbose cout << "NONE.  Platform not supported! " << endl;
+	return EXIT_FAILURE;
 #endif
-	return EXIT_SUCCESS;
 }
 
 int sendCommandToDevice(am_recovery_device *rdev, CFStringRef cfs)
@@ -139,6 +173,16 @@ int performOperation(am_restore_device *rdev, CFMutableDictionaryRef message)
 int socketForPort(am_restore_device *rdev, unsigned int portnum)
 {
     return priv_socketForPort(rdev, portnum);
+}
+
+int waitForResponse(am_recovery_device *rdev, CFDictionaryRef dict)
+{
+	return priv_waitForResponse(rdev, (__CFString*)dict);
+}
+
+int sendMessage(am_recovery_device *rdev, CFMutableDictionaryRef dict)
+{
+	return priv_sendMessage(rdev, (__CFString*)dict);
 }
 
 ///////////////////// CLEAN ME UP ///////////////////////////////

@@ -27,7 +27,7 @@ char *dupstr( char *s )
 char** cmd_completer(const char *text, int start, int end)
 {
 	char **matches = (char **)NULL;
-
+#undef HAVE_READLINE_COMPLETION
 #ifdef HAVE_READLINE_COMPLETION
 	/* If this word is at the start of the line, then it is a command
 	to complete.  Otherwise it is the name of a file in the current
@@ -71,14 +71,14 @@ void initialize_readline()
 	rl_readline_name = "iPHUC";
 
 	// Tell the completer that we want a crack first.
+
+#ifdef HAVE_READLINE_COMPLETION
 	rl_attempted_completion_function = cmd_completer;
 	D("rl_attempted_completion_function registered");
 	
 	/* readline signal handling */
 	rl_catch_signals = 1;
 	D("rl_catch_signals set");
-
-#ifdef HAVE_READLINE_COMPLETION
 	rl_catch_sigwinch = 1;
 	rl_set_signals();
 	D("rl_catch_sigwinch set");
