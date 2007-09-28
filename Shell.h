@@ -35,13 +35,13 @@ extern "C"
 #include <readline/readline.h>
 }
 
+#include <CoreFoundation/CoreFoundation.h>
+
 #include "MobileDevice.h"
 #include "NormalInterface.h"
 #include "RecoveryInterface.h"
 #include "RestoreInterface.h"
 #include "privateFunctions.h"
-
-#include "config.h"
 
 //REMOVE
 #define DEBUG 1

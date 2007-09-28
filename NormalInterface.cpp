@@ -1,3 +1,5 @@
+#include <CoreFoundation/CoreFoundation.h>
+#include "MobileDevice.h"
 #include "NormalInterface.h"
 #include "Shell.h"
 
