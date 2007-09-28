@@ -1,5 +1,3 @@
-#include <CoreFoundation/CoreFoundation.h>
-#include "MobileDevice.h"
 #include "NormalInterface.h"
 #include "Shell.h"
 
@@ -258,8 +256,13 @@ int n_deviceinfo(string *args, struct shell_state *sh)
 	ret = AFCDeviceInfoOpen(sh->conn, &devinfo);
 	if (ret == 0) {
 		AFCKeyValueRead(devinfo, &key, &val);
-		while (key && val) {
-			cout << key << ": " << val << endl;
+		while (key) {
+			if(val) {
+				cout << key << ": " << val << endl;
+			}
+			else {
+				cout << key << ": (NULL)" << endl;
+			}
 			AFCKeyValueRead(devinfo, &key, &val);
 		}
 		AFCKeyValueClose(devinfo);
@@ -271,14 +274,23 @@ int n_deviceinfo(string *args, struct shell_state *sh)
 
 int n_readvalue(string *args, struct shell_state *sh)
 {
+#if 0
 	if( args[1] == "" )
 	{
 		ifNotQuiet cout << "readvalue: Please enter a value to be read" << endl;
 		return SHELL_CONTINUE;
 	}
-	
-	__CFString * result = AMDeviceCopyValue(sh->dev, 0, 
+#endif
+
+	CFStringRef result;
+
+	if(args[1] == "") {
+		result = AMDeviceCopyValue(sh->dev, 0, NULL);
+	}
+	else {
+		result = AMDeviceCopyValue(sh->dev, 0, 
 						CFStringCreateWithCString(NULL, args[1].c_str(), kCFStringEncodingASCII));
+	}
 	if (result)
 		//Windows handling code goes here!
 		CFShow(result);

@@ -31,7 +31,7 @@ Copyright (C) 2007  iPhoneDev Team ( http://iphone.fiveforty.net/wiki/ )
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>
-#include "MobileDevice.h"
+
 
 using namespace std;
 

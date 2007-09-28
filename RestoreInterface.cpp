@@ -175,6 +175,26 @@ int restore_umount(string *args, struct shell_state *sh)
 	return SHELL_CONTINUE;
 }
 
+int restore_querytype(string *args, struct shell_state *sh)
+{
+	mach_error_t retval;
+	
+	D("allocating CFMutableDictionary");
+	CFMutableDictionaryRef req = CFDictionaryCreateMutable(	kCFAllocatorDefault, 0,
+								&kCFTypeDictionaryKeyCallBacks,
+								&kCFTypeDictionaryValueCallBacks);
+
+	D("setting values");
+	CFDictionarySetValue(req, CFSTR("Request"), CFSTR("QueryType"));
+	D("sending dictionary");
+	retval = performOperation(sh->restore_dev, req);
+	
+	ifVerbose cout	<< "QueryType: " << retval << endl;
+	set_rfr(retval);
+
+	return SHELL_CONTINUE;
+}
+
 int restore_filesystemcheck(string *args, struct shell_state *sh)
 {
 	mach_error_t retval;
@@ -190,12 +210,12 @@ int restore_filesystemcheck(string *args, struct shell_state *sh)
 	CFMutableDictionaryRef req = CFDictionaryCreateMutable(	kCFAllocatorDefault, 0,
 								&kCFTypeDictionaryKeyCallBacks,
 								&kCFTypeDictionaryValueCallBacks);
-	
+
 	D("setting values");
+	CFDictionarySetValue(req, CFSTR("Request"), CFSTR("Exec"));
 	CFDictionarySetValue(req, CFSTR("Operation"), CFSTR("FilesystemCheck"));
 	CFDictionarySetValue(req, CFSTR("DeviceName"),
 		CFStringCreateWithCString(NULL, args[1].c_str(), kCFStringEncodingASCII) );
-	
 	D("sending dictionary");
 	retval = performOperation(sh->restore_dev, req);
 	

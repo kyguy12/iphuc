@@ -30,6 +30,7 @@ int restore_partition(string *args, struct shell_state *sh);
 int restore_erase(string *args, struct shell_state *sh);
 int restore_ditto(string *args, struct shell_state *sh);
 int restore_umount(string *args, struct shell_state *sh);
+int restore_querytype(string *args, struct shell_state *sh);
 int restore_filesystemcheck(string *args, struct shell_state *sh);
 int restore_mkdir(string *args, struct shell_state *sh);
 int restore_force(string *args, struct shell_state *sh);

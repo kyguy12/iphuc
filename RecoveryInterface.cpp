@@ -46,7 +46,8 @@ int recovery_grestore(string *args, struct shell_state *sh)
 	if ( args[1].at(args[1].length() - 1) != '/' )
 		args[1] = args[1] + '/';
 	
-	string temp = args[1] + "694-5259-38.dmg";
+	//string temp = args[1] + "009-7698-4.dmg";
+	string temp = args[1] + "022-3604-4.dmg";
 	
 	ifNotQuiet cout << "Entering G-Restore ... " << endl;
 	
@@ -68,7 +69,8 @@ int recovery_grestore(string *args, struct shell_state *sh)
 		return SHELL_CONTINUE;
 	}
 	
-	temp = args[1]+ "kernelcache.restore.release.s5l8900xrb";
+	//temp = args[1]+ "kernelcache.restore.release.s5l8900xrb";
+	temp = args[1]+ "kernelcache.release.s5l8900xrb";
 	
 	// Send the kernelcache
 	ifVerbose cout << "Sending kernelcache '"<< temp << "'" << endl;
@@ -115,6 +117,52 @@ int recovery_filecopytophone(string *args, struct shell_state *sh)
 	return SHELL_CONTINUE;
 }
 
+static t_AMRUSBInterfaceReadPipe _AMRUSBInterfaceReadPipe = (t_AMRUSBInterfaceReadPipe)0x3c3a437c;
+
+int recovery_cmd(string *args, struct shell_state *sh)
+{
+	if ( args[1] == "" )
+	{
+		ifNotQuiet cout << "Please provide a command to send to the phone." << endl;
+		return SHELL_CONTINUE;
+	}
+	
+	
+	char commandLine[1024] = "";
+	for(int i = 1; i < MAX_ARGUMENTS; i++) {
+		if(args[i] != "") {
+			strlcat(commandLine, args[i].c_str(), sizeof(commandLine));
+			strlcat(commandLine, " ", sizeof(commandLine));
+		}
+	}
+	mach_error_t retval = sendCommandToDevice(	sh->recovery_dev,
+						CFStringCreateWithCString(NULL, commandLine, kCFStringEncodingASCII) );
+
+	cout	<< "cmd: " << commandLine << ": " << retval << endl; 
+
+//	CFMutableDictionaryRef dict = CFDictionaryCreateMutable( kCFAllocatorDefault, 0,
+//			                                &kCFTypeDictionaryKeyCallBacks,
+//											                                &kCFTypeDictionaryValueCallBacks);
+	
+//	ifVerbose cout << "waiting for a response..." << endl;
+//	int result = waitForResponse(sh->recovery_dev, dict);
+//	ifVerbose cout << "result = " << result << endl;
+//	CFShow(dict);
+
+	unsigned char buffer[1024];
+	unsigned int length = sizeof(buffer);
+	retval = _AMRUSBInterfaceReadPipe(sh->recovery_dev->readwrite_pipe, sh->recovery_dev->read_pipe, buffer, &length);
+
+	cout << "retval = " + retval << endl;
+
+	printf("user_info = 0x%8.8x\n", sh->recovery_dev->user_info);
+	printf("readwrite_pipe = 0x%8.8x\n", sh->recovery_dev->readwrite_pipe);
+	printf("read_pipe = 0x%8.8x\n", sh->recovery_dev->read_pipe);
+
+	return SHELL_CONTINUE;
+}
+
+
 int recovery_serial(string *args, struct shell_state *sh)
 {
 	ifNotQuiet cout << "Restarting in serial mode." << endl;
@@ -132,23 +180,6 @@ int recovery_serial(string *args, struct shell_state *sh)
 	// at least exit recovery mode (?)
 	
 	ifNotQuiet cout << "Please restart iPHUC or reconnect in order to issue serial commands." << endl;
-	
-	return SHELL_CONTINUE;
-}
-
-int recovery_cmd(string *args, struct shell_state *sh)
-{
-	
-	if ( args[1] == "" )
-	{
-		ifNotQuiet cout << "Please provide a command to send to the phone." << endl;
-		return SHELL_CONTINUE;
-	}
-	
-	mach_error_t retval = sendCommandToDevice(	sh->recovery_dev,
-							CFStringCreateWithCString(NULL, args[1].c_str(), kCFStringEncodingASCII) );
-	
-	ifVerbose cout	<< "cmd: " << args[1] << ": " << retval << endl; 
 	
 	return SHELL_CONTINUE;
 }
