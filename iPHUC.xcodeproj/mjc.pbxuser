@@ -1,0 +1,191 @@
+// !$*UTF8*$!
+{
+	0867D6ABFE840B52C02AAC07 /* English */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {814, 429}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 101}";
+			sepNavWindowFrame = "{{107, 532}, {873, 557}}";
+		};
+	};
+	20286C28FDCF999611CA2CEA /* Project object */ = {
+		activeArchitecture = i386;
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 2585A37F0CAD248B007A84F2 /* iPHUC */;
+		activeTarget = 8D0C4E890486CD37000505A6 /* iPHUC */;
+		addToTargets = (
+			8D0C4E890486CD37000505A6 /* iPHUC */,
+		);
+		codeSenseManager = 2585A3890CAD248F007A84F2 /* Code sense */;
+		executables = (
+			2585A37F0CAD248B007A84F2 /* iPHUC */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					243,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 212674066;
+			PBXWorkspaceStateSaveDate = 212674066;
+		};
+		perUserProjectItems = {
+			25F4ED950CAD2DD200E236D8 /* PBXBookmark */ = 25F4ED950CAD2DD200E236D8 /* PBXBookmark */;
+			25F4EDB00CAD2F1200E236D8 /* PBXTextBookmark */ = 25F4EDB00CAD2F1200E236D8 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 2585A3880CAD248F007A84F2 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	2585A37F0CAD248B007A84F2 /* iPHUC */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = iPHUC;
+		sourceDirectories = (
+		);
+	};
+	2585A3880CAD248F007A84F2 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+	};
+	2585A3890CAD248F007A84F2 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	2585A38B0CAD24F1007A84F2 /* main.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {830, 5978}}";
+			sepNavSelRange = "{198, 0}";
+			sepNavVisRange = "{0, 1494}";
+			sepNavWindowFrame = "{{61, 574}, {873, 557}}";
+		};
+	};
+	2585A38E0CAD24F1007A84F2 /* privateFunctions.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {814, 4130}}";
+			sepNavSelRange = "{265, 0}";
+			sepNavVisRange = "{0, 867}";
+			sepNavWindowFrame = "{{147, 51}, {873, 557}}";
+		};
+	};
+	2585A38F0CAD24F1007A84F2 /* privateFunctions.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {733, 938}}";
+			sepNavSelRange = "{1420, 99}";
+			sepNavVisRange = "{1270, 771}";
+			sepNavWindowFrame = "{{107, 532}, {873, 557}}";
+		};
+	};
+	2585A3900CAD24F1007A84F2 /* RecoveryInterface.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {814, 2660}}";
+			sepNavSelRange = "{6061, 0}";
+			sepNavVisRange = "{5416, 822}";
+			sepNavWindowFrame = "{{31, 117}, {873, 557}}";
+		};
+	};
+	2585A3940CAD24F1007A84F2 /* Shell.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {814, 8974}}";
+			sepNavSelRange = "{10828, 0}";
+			sepNavVisRange = "{10229, 763}";
+			sepNavWindowFrame = "{{176, 469}, {873, 557}}";
+		};
+	};
+	2585A3950CAD24F1007A84F2 /* Shell.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {814, 2282}}";
+			sepNavSelRange = "{1132, 9}";
+			sepNavVisRange = "{848, 852}";
+			sepNavWindowFrame = "{{15, 616}, {873, 557}}";
+		};
+	};
+	25F4ED6A0CAD2AC000E236D8 /* MobileDevice.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {814, 7406}}";
+			sepNavSelRange = "{20301, 147}";
+			sepNavVisRange = "{19625, 1270}";
+			sepNavWindowFrame = "{{655, 416}, {873, 557}}";
+		};
+	};
+	25F4ED950CAD2DD200E236D8 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 2585A38E0CAD24F1007A84F2 /* privateFunctions.cpp */;
+	};
+	25F4EDB00CAD2F1200E236D8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2585A38E0CAD24F1007A84F2 /* privateFunctions.cpp */;
+		name = "privateFunctions.cpp: 11";
+		rLen = 0;
+		rLoc = 265;
+		rType = 0;
+		vrLen = 867;
+		vrLoc = 0;
+	};
+	5048396D09E3307300765E4B /* iPHUCProj.xcconfig */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {814, 429}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 274}";
+			sepNavWindowFrame = "{{38, 595}, {873, 557}}";
+		};
+	};
+	5048396E09E3307300765E4B /* iPHUCTarget.xcconfig */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {814, 429}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 173}";
+			sepNavWindowFrame = "{{15, 616}, {873, 557}}";
+		};
+	};
+	8D0C4E890486CD37000505A6 /* iPHUC */ = {
+		activeExec = 0;
+		executables = (
+			2585A37F0CAD248B007A84F2 /* iPHUC */,
+		);
+	};
+	8D0C4E960486CD37000505A6 /* Info.plist */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {814, 429}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 763}";
+			sepNavWindowFrame = "{{84, 553}, {873, 557}}";
+		};
+	};
+}
