@@ -8,12 +8,8 @@
 
 #if defined(__APPLE__)
 #include <dlfcn.h>
-#include <mach/mach.h>
-#include <mach-o/dyld.h>
 #include <mach-o/loader.h>
 #include <mach-o/nlist.h>
-#include <mach-o/stab.h>
-#include <mach-o/arch.h>
 #endif
 
 using namespace std;

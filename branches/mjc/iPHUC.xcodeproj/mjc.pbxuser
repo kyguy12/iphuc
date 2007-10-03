@@ -43,11 +43,11 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 212674066;
-			PBXWorkspaceStateSaveDate = 212674066;
+			PBXPerProjectTemplateStateSaveDate = 212693304;
+			PBXWorkspaceStateSaveDate = 212693304;
 		};
 		perUserProjectItems = {
-			25F4ED950CAD2DD200E236D8 /* PBXBookmark */ = 25F4ED950CAD2DD200E236D8 /* PBXBookmark */;
+			25A337E90CADF2F1007A6907 /* PBXTextBookmark */ = 25A337E90CADF2F1007A6907 /* PBXTextBookmark */;
 			25F4EDB00CAD2F1200E236D8 /* PBXTextBookmark */ = 25F4EDB00CAD2F1200E236D8 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 2585A3880CAD248F007A84F2 /* Source Control */;
@@ -98,10 +98,10 @@
 	};
 	2585A38E0CAD24F1007A84F2 /* privateFunctions.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {814, 4130}}";
-			sepNavSelRange = "{265, 0}";
-			sepNavVisRange = "{0, 867}";
-			sepNavWindowFrame = "{{147, 51}, {873, 557}}";
+			sepNavIntBoundsRect = "{{0, 0}, {814, 4046}}";
+			sepNavSelRange = "{234, 0}";
+			sepNavVisRange = "{0, 832}";
+			sepNavWindowFrame = "{{47, 105}, {873, 557}}";
 		};
 	};
 	2585A38F0CAD24F1007A84F2 /* privateFunctions.h */ = {
@@ -136,6 +136,16 @@
 			sepNavWindowFrame = "{{15, 616}, {873, 557}}";
 		};
 	};
+	25A337E90CADF2F1007A6907 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2585A38E0CAD24F1007A84F2 /* privateFunctions.cpp */;
+		name = "privateFunctions.cpp: 11";
+		rLen = 0;
+		rLoc = 234;
+		rType = 0;
+		vrLen = 832;
+		vrLoc = 0;
+	};
 	25F4ED6A0CAD2AC000E236D8 /* MobileDevice.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {814, 7406}}";
@@ -144,16 +154,12 @@
 			sepNavWindowFrame = "{{655, 416}, {873, 557}}";
 		};
 	};
-	25F4ED950CAD2DD200E236D8 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 2585A38E0CAD24F1007A84F2 /* privateFunctions.cpp */;
-	};
 	25F4EDB00CAD2F1200E236D8 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 2585A38E0CAD24F1007A84F2 /* privateFunctions.cpp */;
 		name = "privateFunctions.cpp: 11";
 		rLen = 0;
-		rLoc = 265;
+		rLoc = 234;
 		rType = 0;
 		vrLen = 867;
 		vrLoc = 0;
