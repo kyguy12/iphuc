@@ -1,0 +1,1 @@
+iPHoneUtilityClient (iPHUC) is the second generation of iPhoneInterface which allows convenient command line access to the iphone from a desktop computer.  Now with a maintainable source!
